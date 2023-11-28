@@ -32,7 +32,7 @@ pub struct Tracker {
     /// Application ID
     app_id: String,
     /// Emitter used to send events to the Collector
-    emitter: Box<dyn Emitter>,
+    emitter: Box<dyn Emitter + Send>,
     /// Additional tracker config
     config: TrackerConfig,
     /// The [Subject] that will be applied to all events
@@ -73,7 +73,7 @@ impl Tracker {
         &self.app_id
     }
 
-    pub fn emitter(&self) -> &Box<dyn Emitter> {
+    pub fn emitter(&self) -> &Box<dyn Emitter + Send> {
         &self.emitter
     }
 
